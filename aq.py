@@ -47,7 +47,7 @@ def email_message(sender, subject, messageFile, *recipients):
     return msg
 
 
-def send_email(message, user, password, server='smtp.gmail.com', port=587):
+def send_email(message, user=None, password=None, server='smtp.gmail.com', port=587):
     """
     :param message: MIMEMultipart message, i.e. from email_message function
     :param user: username for the login on SMTP server
@@ -64,7 +64,9 @@ def send_email(message, user, password, server='smtp.gmail.com', port=587):
         mailServer.ehlo()
         mailServer.starttls()
         mailServer.ehlo()
-        mailServer.login(user, password)
+
+        if user and password:
+            mailServer.login(user, password)
 
         # Get sender & recipient from message
         recipientList = message["To"].split(", ")
