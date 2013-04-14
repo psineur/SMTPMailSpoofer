@@ -12,7 +12,7 @@ class FileIsEmptyError(ValueError):
 
 def email_message(sender, subject, messageFile, *recipients):
     """
-    Returns string representation of simple text email message that is ready to be sent
+    Returns MIMEMultipart message with simple text email message that is ready to be sent with send_email()
     :param sender: string, e-mail address to be used as sender
     :param subject: string, subject of a message
     :param messageFile: string, file path to text file with message
@@ -44,12 +44,12 @@ def email_message(sender, subject, messageFile, *recipients):
     msg.attach(MIMEText(file.read()))
     file.close()
 
-    return str(msg)
+    return msg
 
 
 def send_email(message, user, password, server='smtp.gmail.com', port=587):
     """
-    :param message: string representation of message, i.e. from email_message function
+    :param message: MIMEMultipart message, i.e. from email_message function
     :param user: username for the login on SMTP server
     :param password: password for the login on SMTP server
     :param server: (optional) string, server from where you will be sending the email
@@ -70,7 +70,7 @@ def send_email(message, user, password, server='smtp.gmail.com', port=587):
         recipientList = message["To"].split(", ")
 
         # Send e-mail
-        mailServer.sendmail(message["From"], recipientList, message)
+        mailServer.sendmail(message["From"], recipientList, str(message))
 
     finally:
         # Close connection to remote SMTP server
