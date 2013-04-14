@@ -78,6 +78,10 @@ def send_email(message, user=None, password=None, server='smtp.gmail.com', port=
         # Close connection to remote SMTP server
         mailServer.close()
 
+# Main flow of execution when laucnhed as
+# python3 aq.py
+# TODO: add interactive or/and commandline options interface
+# TODO: catch exceptions & add logs
 if __name__ == '__main__':
     msg = email_message("umpalumpa@gogo.com", "Testo-Presto", "message.txt", "andrew.quel@gmail.com")
     send_email(msg, "andrewquelsmtp@gmail.com","mailgooglecom")
