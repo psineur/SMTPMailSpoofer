@@ -79,5 +79,5 @@ def send_email(message, user=None, password=None, server='smtp.gmail.com', port=
         mailServer.close()
 
 if __name__ == '__main__':
-    msg = email_message("umpalumpa@gogo.com", "Testo-Presto", "message.txt", "psineur@me.com")
+    msg = email_message("umpalumpa@gogo.com", "Testo-Presto", "message.txt", "andrew.quel@gmail.com")
     send_email(msg, "andrewquelsmtp@gmail.com","mailgooglecom")
