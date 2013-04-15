@@ -116,7 +116,7 @@ if __name__ == '__main__':
 
     # Bail out if we don't have required parameters
     if not (sender and subject and filename and recipient):
-        print("Sender, Subject, Filename & Recipient must be set!")
+        print("--from, --subject, --message & --to must be set!")
         exit()
 
     # Prepare & Send Message
