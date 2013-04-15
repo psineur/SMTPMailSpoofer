@@ -108,10 +108,10 @@ if __name__ == '__main__':
 
     # Parse command line arguments
     (options, args) = parser.parse_args()
-    sender = options['sender']
-    subject = options['subject']
-    filename = options['filename']
-    recipient = options['recipient']
+    sender = options.sender
+    subject = options.subject
+    filename = options.filename
+    recipient = options.recipient
 
     # Bail out if we don't have required parameters
     if not (sender and subject and filename and recipient):
@@ -123,7 +123,7 @@ if __name__ == '__main__':
     try:
         msg = email_message(sender, subject, filename, recipient)
         print('Sending...')
-        send_email(msg, options['user'], options['password'])
+        send_email(msg, options.user, options.password)
         print('Message Sent!')
         
     # Handle all possible errors & log them
