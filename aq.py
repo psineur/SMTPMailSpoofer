@@ -1,3 +1,4 @@
+#!/usr/local/bin/python3
 __author__ = 'Andrew Quel'
 
 import os
