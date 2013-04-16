@@ -92,10 +92,13 @@ if __name__ == '__main__':
     # Prepare usage & description text for --help argument
     helpUsage = "%prog -m message.txt -s 'Subject' -f 'sender@me.com' -t 'recipient@they.com'"
     helpDescription = """Connects to remote SMTP server & sends plain text message
-    You can use this gmail account for auth:
-    andrewquelsmtp@gmail.com
-    mailgooglecom
-    """
+You can use this gmail account for auth:
+andrewquelsmtp@gmail.com
+mailgooglecom
+
+Example:
+./aq.py --from 'notmyemail@mail.com' --subject 'test smtp' --message message.txt --to 'andrew.quel@gmail.com' -u andrewquelsmtp@gmail.com -p mailgooglecom
+"""
 
     # Setup parser to show help, description & parse options
     parser = OptionParser(usage=helpUsage, description=helpDescription)
@@ -108,8 +111,8 @@ if __name__ == '__main__':
     optionalGroup = OptionGroup(parser, "Optional")
     optionalGroup.add_option("-u", "--user", dest="user", default=None, help="User for auth on server.")
     optionalGroup.add_option("-p", "--password", dest="password", default=None, help="Password for auth on server.")
-    optionalGroup.add_option("--server", dest="server", default=None, help="Server URL.")
-    optionalGroup.add_option("--port", dest="port", default=None, help="Server port.")
+    optionalGroup.add_option("--server", dest="server", default='smtp.gmail.com', help="Server URL.")
+    optionalGroup.add_option("--port", dest="port", default=587, help="Server port.")
     parser.add_option_group(optionalGroup)
 
     # Parse command line arguments
@@ -129,7 +132,7 @@ if __name__ == '__main__':
     try:
         msg = email_message(sender, subject, filename, recipient)
         print('Sending...')
-        send_email(msg, options.user, options.password)
+        send_email(msg, options.user, options.password, server=options.server, port=options.port)
         print('Message Sent!')
         
     # Handle all possible errors & log them
