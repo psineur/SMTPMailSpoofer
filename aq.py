@@ -68,7 +68,7 @@ def send_email(message, user=None, password=None, server='smtp.gmail.com', port=
         try:
             mailServer.starttls()
             mailServer.ehlo()
-        except smtplib.SMTPHeloError:
+        except smtplib.SMTPException:
             print("TLS not supported")
             pass
 
